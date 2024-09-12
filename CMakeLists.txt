@@ -35,7 +35,7 @@ if( ${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 		${CMAKE_SOURCE_DIR}/include
 		${SDL2_INCLUDE_DIRS}
 	)
-
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --embed-file ${CMAKE_SOURCE_DIR}/zelda3_assets.dat@/ --embed-file ${CMAKE_SOURCE_DIR}/zelda3.ini@/")
 	set_target_properties(${target_name} PROPERTIES LINK_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/zelda3.sfc)
 else()
 	if (NINTENDO_SWITCH)
