@@ -16,9 +16,11 @@ endif
 
 .PHONY: all clean clean_obj clean_gen
 
-all: $(TARGET_EXEC) zelda3_assets.dat
+all: zelda3_assets.dat $(TARGET_EXEC)
+
 $(TARGET_EXEC): $(OBJS) $(RES)
-	$(CC) $^ -o $@ $(LDFLAGS) $(SDLFLAGS) -sALLOW_MEMORY_GROWTH=1 -sWASM=1 -sINVOKE_RUN=0 -sENVIRONMENT=web -sEXPORTED_RUNTIME_METHODS="['FS','ccall','cwrap']" -sFILESYSTEM=1 -sFORCE_FILESYSTEM=1 -lidbfs.js --embed-file zelda3.ini --shell-file shell.html
+	$(CC) $^ -o $@ $(LDFLAGS) $(SDLFLAGS) -sALLOW_MEMORY_GROWTH=1 -sWASM=1 -sINVOKE_RUN=0 -sENVIRONMENT=web -sEXPORTED_RUNTIME_METHODS="['FS','ccall','cwrap']" -sFILESYSTEM=1 -sFORCE_FILESYSTEM=1 -lidbfs.js --embed-file zelda3.ini --embed-file zelda3_assets.dat --shell-file shell.html
+
 %.o : %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
